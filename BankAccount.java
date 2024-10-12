@@ -17,11 +17,11 @@ public class BankAccount {
         this.balance += amount;
     }
 
-    public void withdraw(double amount){
-        if (amount <= this.balance){
-            this.balance -= amount;
+    public void withdraw(double amount) throws InsufficientFundsException {
+        if (amount <= balance) {
+            balance -= amount;
         } else {
-            System.out.println("Insufficient funds");
+            throw new InsufficientFundsException("Insufficient funds for withdrawal");
         }
     }
 
@@ -29,12 +29,13 @@ public class BankAccount {
         return this.balance;
     }
 
-    public void transfer(BankAccount recipient, double amount){
-        if (amount <= this.balance){
-            this.withdraw(amount);
-            recipient.deposit(amount);
-        } else {
-            System.out.println("Insufficient funds for transfer");
-        }
+    public void transfer(BankAccount recipient, double amount) throws InsufficientFundsException {
+        withdraw(amount);
+        recipient.deposit(amount);
+    }
+
+    public void transfer(String recipientAccountNumber, double amount) throws InsufficientFundsException {
+        withdraw(amount);
+        System.out.println("Transferring " + amount + " to account " + recipientAccountNumber);
     }
 }
