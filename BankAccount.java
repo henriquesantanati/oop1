@@ -3,18 +3,17 @@ public class BankAccount {
     private String accountNumber;
     private double balance;
 
-    public BankAccount(String accountNumber, double initialBalance){
+    public BankAccount(String accountNumber, double initialBalance) {
         this.accountNumber = accountNumber;
         this.balance = initialBalance;
     }
 
-    // Construtor overloading for accounts without initialBalance parameter
-    public BankAccount(String accountNumber){
-        this(accountNumber, 0.0); // this() here will call the above constructor
+    public BankAccount(String accountNumber) {
+        this(accountNumber, 0.0);
     }
 
-    public void deposit(double amount){
-        this.balance += amount;
+    public void deposit(double amount) {
+        balance += amount;
     }
 
     public void withdraw(double amount) throws InsufficientFundsException {
@@ -25,8 +24,8 @@ public class BankAccount {
         }
     }
 
-    public double getBalance(){
-        return this.balance;
+    public double getBalance() {
+        return balance;
     }
 
     public void transfer(BankAccount recipient, double amount) throws InsufficientFundsException {
