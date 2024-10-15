@@ -22,5 +22,19 @@ public class Main {
 
         investmentAccount.applyInterest();
         System.out.println("Investment account balance after interest: " + investmentAccount.getBalance());
+
+        // Print transaction history for account1
+        System.out.println("\nTransaction History for Account 1:");
+        
+        for (String transaction : account1.getTransactionHistory()) {
+            System.out.println(transaction);
+        }
+
+        // Print transaction history for account2
+        System.out.println("\nTransaction History for Account 2:");
+
+        for (String transaction : account2.getTransactionHistory()) {
+            System.out.println(transaction);
+        }
     }
 }

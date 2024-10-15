@@ -1,11 +1,15 @@
+import java.util.ArrayList;
+import java.util.List;
 public class BankAccount {
     
     private String accountNumber;
     private double balance;
+    private List<String> transactionHistory;
 
     public BankAccount(String accountNumber, double initialBalance) {
         this.accountNumber = accountNumber;
         this.balance = initialBalance;
+        this.transactionHistory = new ArrayList<>();
     }
 
     public BankAccount(String accountNumber) {
@@ -13,28 +17,40 @@ public class BankAccount {
     }
 
     public void deposit(double amount) {
-        balance += amount;
+        this.balance += amount;
+        this.addTransaction("Deposit: " + amount);
     }
 
     public void withdraw(double amount) throws InsufficientFundsException {
         if (amount <= balance) {
-            balance -= amount;
+            this.balance -= amount;
+            this.addTransaction("Withdrawal: " + amount);
         } else {
             throw new InsufficientFundsException("Insufficient funds for withdrawal");
         }
     }
 
     public double getBalance() {
-        return balance;
+        return this.balance;
     }
 
     public void transfer(BankAccount recipient, double amount) throws InsufficientFundsException {
         withdraw(amount);
         recipient.deposit(amount);
+        this.addTransaction("Transfer to " + recipient.accountNumber + ": " + amount);
     }
 
-    public void transfer(String recipientAccountNumber, double amount) throws InsufficientFundsException {
-        withdraw(amount);
-        System.out.println("Transferring " + amount + " to account " + recipientAccountNumber);
+    public void transfer(String recipientExternalAccountNumber, double amount) throws InsufficientFundsException {
+        this.withdraw(amount);
+        this.addTransaction("Transfer to " + recipientExternalAccountNumber + ": " + amount);
+        System.out.println("Transferring " + amount + " to account " + recipientExternalAccountNumber);
+    }
+    
+    private void addTransaction(String transaction) {
+        this.transactionHistory.add(transaction);
+    }
+
+    public List<String> getTransactionHistory() {
+        return new ArrayList<>(this.transactionHistory);
     }
 }
