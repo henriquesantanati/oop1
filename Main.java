@@ -1,8 +1,8 @@
 public class Main {
     public static void main(String[] args) {
-        BankAccount account1 = new BankAccount("123456", 1000);
-        BankAccount account2 = new BankAccount("789012");
-        InvestmentAccount investmentAccount = new InvestmentAccount("246810", 5000, 0.005);
+        var account1 = new BankAccount("123456", 1000);
+        var account2 = new BankAccount("789012");
+        var investmentAccount = new InvestmentAccount("246810", 5000, 0.005);
 
         account1.deposit(500);
         try {
@@ -25,15 +25,13 @@ public class Main {
 
         // Print transaction history for account1
         System.out.println("\nTransaction History for Account 1:");
-        
-        for (String transaction : account1.getTransactionHistory()) {
+        for (var transaction : account1.getTransactionHistory()) {
             System.out.println(transaction);
         }
 
         // Print transaction history for account2
         System.out.println("\nTransaction History for Account 2:");
-
-        for (String transaction : account2.getTransactionHistory()) {
+        for (var transaction : account2.getTransactionHistory()) {
             System.out.println(transaction);
         }
     }
