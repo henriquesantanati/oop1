@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        var account1 = new BankAccount("123456", 1000);
-        var account2 = new BankAccount("789012");
+        var account1 = new BankAccount("123456", 1000, AccountType.CHECKING);
+        var account2 = new BankAccount("789012", AccountType.SAVINGS);
         var investmentAccount = new InvestmentAccount("246810", 5000, 0.005);
 
         account1.deposit(500);
@@ -34,5 +34,11 @@ public class Main {
         for (var transaction : account2.getTransactionHistory()) {
             System.out.println(transaction);
         }
+
+        // Print account types
+        System.out.println("\nAccount Types:");
+        System.out.println(account1);
+        System.out.println(account2);
+        System.out.println(investmentAccount);
     }
 }
